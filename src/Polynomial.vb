@@ -1,6 +1,7 @@
 ﻿
 
 
+
 Public Class Polynomial
     Private Const TOLERANCE As Double = 0.000001
     Private Const ACCURACY As Integer = 6
@@ -685,4 +686,5 @@ Public Class Polynomial
 
 
 End Class
+
 
