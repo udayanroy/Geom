@@ -156,6 +156,10 @@ Namespace Geometry
             End Get
         End Property
 
+        Public Function CountItems() As Integer
+            Return Me.spaths.Count
+        End Function
+
         Public Sub Transform(ByVal mat As GMatrix)
             For Each sp As SubPath In Me.spaths
                 sp.Transform(mat)
