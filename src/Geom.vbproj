@@ -64,6 +64,7 @@
     <Compile Include="Geometry\GPath.vb" />
     <Compile Include="Geometry\GPoint.vb" />
     <Compile Include="Geometry\GRect.vb" />
+    <Compile Include="Geometry\GSize.vb" />
     <Compile Include="Intersection.vb" />
     <Compile Include="Polynomial.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
