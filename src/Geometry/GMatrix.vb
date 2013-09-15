@@ -131,15 +131,16 @@ Namespace Geometry
             _m22 += tm22
         End Sub
 
-        Public Sub Transform(ByRef p As GPoint)
+        Public Sub map(ByRef p As GPoint)
             Dim fx = _m11 * p.X + _m21 * p.Y + _dx
             Dim fy = _m12 * p.X + _m22 * p.Y + _dy
             p.X = fx
             p.Y = fy
         End Sub
-        Public Sub Transform(ByRef points As GPoint())
+
+        Public Sub map(ByRef points As GPoint())
             For Each p As GPoint In points
-                Me.Transform(p)
+                Me.map(p)
             Next
         End Sub
 
