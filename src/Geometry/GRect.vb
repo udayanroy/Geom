@@ -50,6 +50,11 @@ Namespace Geometry
             p2.SetValue(P1.X + width, P1.Y + height)
         End Sub
 
+        Public Sub New(ByVal location As GPoint, ByVal size As GSize)
+            P1.SetValue(location)
+            p2.SetValue(P1.X + size.Width, P1.Y + size.Height)
+        End Sub
+
 #Region "Property"
 
 
@@ -80,6 +85,17 @@ Namespace Geometry
                 P1 = value
             End Set
         End Property
+
+        Public Property Size As GSize
+            Get
+                Return New GSize(p2.X - P1.X, p2.Y = P1.Y)
+            End Get
+            Set(ByVal value As GSize)
+                p2.X = P1.X + value.Width
+                p2.Y = P1.Y + value.Height
+            End Set
+        End Property
+
         Public Property X As Double
             Get
                 Return P1.X
@@ -183,6 +199,11 @@ Namespace Geometry
 
             Return ret
         End Function
+
+        Public Sub Transform(ByVal mat As GMatrix)
+            mat.map(Me.P1)
+            mat.map(Me.p2)
+        End Sub
 
     End Structure
 
