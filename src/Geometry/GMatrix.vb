@@ -40,7 +40,30 @@ Namespace Geometry
 
 
         Public Sub New()
+            _m11 = 1.0
+            _m12 = 0
+            _m21 = 0
+            _m22 = 1
+            _dx = 0
+            _dy = 0
+        End Sub
 
+        Public Sub New(ByVal m11 As Single, ByVal m12 As Single, ByVal m21 As Single, ByVal m22 As Single, ByVal dx As Single, ByVal dy As Single)
+            _m11 = m11
+            _m12 = m12
+            _m21 = m21
+            _m22 = m22
+            _dx = dx
+            _dy = dy
+        End Sub
+
+        Private Sub setMatrix(ByVal m11 As Single, ByVal m12 As Single, ByVal m21 As Single, ByVal m22 As Single, ByVal dx As Single, ByVal dy As Single)
+            _m11 = m11
+            _m12 = m12
+            _m21 = m21
+            _m22 = m22
+            _dx = dx
+            _dy = dy
         End Sub
 
         Public Function isInvertible() As Boolean
@@ -129,6 +152,18 @@ Namespace Geometry
             _m12 += tm12
             _m21 += tm21
             _m22 += tm22
+        End Sub
+
+        Public Sub Multiply(ByVal m As GMatrix)
+            Dim tm11 = _m11 * m._m11 + _m12 * m._m12
+            Dim tm12 = _m11 * m._m12 + _m12 * m._m22
+            Dim tm21 = _m21 * m._m11 + _m22 * m._m21
+            Dim tm22 = _m21 * m._m12 + _m22 * m._m22
+
+            Dim tdx = _dx * m._m11 + _dy * m._m21 + m._dx
+            Dim tdy = _dx * m._m12 + _dy * m._m22 + m._dy
+
+            Me.setMatrix(tm11, tm12, tm21, tm22, tdx, tdy)
         End Sub
 
         Public Sub map(ByRef p As GPoint)
