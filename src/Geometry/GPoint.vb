@@ -171,6 +171,10 @@ Namespace Geometry
             Return Me.X + Me.Y
         End Function
 
+        Public Sub Transformation(ByVal mat As GMatrix)
+            mat.map(Me)
+        End Sub
+
     End Structure
 
 

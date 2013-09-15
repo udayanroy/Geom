@@ -97,6 +97,12 @@ Namespace Geometry
 
         End Property
 
+        Public Sub Transform(ByVal mat As GMatrix)
+            mat.map(Me._p1)
+            mat.map(Me._p2)
+            mat.map(Me._c1)
+            mat.map(Me._c2)
+        End Sub
 
         Public Function pointATt(ByVal t As Double) As GPoint
             Dim b As New GPoint
