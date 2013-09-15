@@ -163,15 +163,15 @@ Namespace Geometry
             Next
         End Sub
 
-        Public Function GetStrictBound() As GRect
+        Public Function GetTightBound() As GRect
             Dim flag As Boolean = True
             Dim bound As GRect
             For Each sp As SubPath In Me.spaths
                 If flag Then
-                    bound = sp.GetStrictBound
+                    bound = sp.GetTightBound
                     flag = False
                 Else
-                    bound = bound.union(sp.GetStrictBound)
+                    bound = bound.union(sp.GetTightBound)
                 End If
             Next
             Return bound
@@ -293,7 +293,7 @@ Namespace Geometry
 
         End Function
 
-        Public Function GetStrictBound() As GRect
+        Public Function GetTightBound() As GRect
             Dim result As GRect
 
 
@@ -430,9 +430,9 @@ Namespace Geometry
         End Function
 
         Public Sub Transform(ByVal mat As GMatrix)
-            mat.Transform(M)
-            mat.Transform(C1)
-            mat.Transform(C2)
+            mat.map(M)
+            mat.map(C1)
+            mat.map(C2)
 
         End Sub
     End Class
