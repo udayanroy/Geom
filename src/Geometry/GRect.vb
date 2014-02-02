@@ -88,7 +88,7 @@ Namespace Geometry
 
         Public Property Size As GSize
             Get
-                Return New GSize(p2.X - P1.X, p2.Y = P1.Y)
+                Return New GSize(p2.X - P1.X, p2.Y - P1.Y)
             End Get
             Set(ByVal value As GSize)
                 p2.X = P1.X + value.Width
@@ -124,7 +124,7 @@ Namespace Geometry
 
         Public Property Height As Double
             Get
-                Return p2.Y = P1.Y
+                Return p2.Y - P1.Y
             End Get
             Set(ByVal value As Double)
                 p2.Y = P1.Y + value

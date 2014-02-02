@@ -325,7 +325,7 @@ Namespace Geometry
             Return sp
         End Function
 
-        Friend Function countBezier() As Integer
+        Public Function countBezier() As Integer
 
             Dim n As Integer
             n = CountPoints()
@@ -336,7 +336,7 @@ Namespace Geometry
 
         End Function
 
-        Friend Function getBezier(ByVal i As Integer) As GCubicBezier
+        Public Function getBezier(ByVal i As Integer) As GCubicBezier
             Dim n = countBezier()
             Dim pp1 = Points(i)
 
@@ -353,7 +353,18 @@ Namespace Geometry
             End If
             Dim pp2 = Points(np2)
 
-            Dim bez As New GCubicBezier(pp1.M, pp1.C2, pp2.C1, pp2.M)
+            Dim c1, c2 As GPoint
+            If pp1.Type = PathPointType.None Then
+                c1 = pp1.M
+            Else
+                c1 = pp1.C2
+            End If
+            If pp2.Type = PathPointType.None Then
+                c2 = pp2.M
+            Else
+                c2 = pp2.C1
+            End If
+            Dim bez As New GCubicBezier(pp1.M, c1, c2, pp2.M)
 
             Return bez
         End Function
