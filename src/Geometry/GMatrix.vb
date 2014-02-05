@@ -57,6 +57,10 @@ Namespace Geometry
             _dy = dy
         End Sub
 
+        Public Function Clone() As GMatrix
+            Return New GMatrix(_m11, _m12, _m21, _m22, _dx, _dy)
+        End Function
+
         Private Sub setMatrix(ByVal m11 As Single, ByVal m12 As Single, ByVal m21 As Single, ByVal m22 As Single, ByVal dx As Single, ByVal dy As Single)
             _m11 = m11
             _m12 = m12
