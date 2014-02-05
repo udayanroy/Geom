@@ -160,6 +160,10 @@ Namespace Geometry
             Me.Multiply(matrix)
         End Sub
 
+        Public Sub RoatateAt(ByVal angle As Double, ByVal center As GPoint)
+            Me.RoatateAt(angle, center.X, center.Y)
+        End Sub
+
         Public Sub Shear(ByVal sh As Single, ByVal sv As Single)
             Dim tm11 = sv * _m21
             Dim tm12 = sv * _m22
