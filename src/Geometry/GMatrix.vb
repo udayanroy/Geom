@@ -192,6 +192,16 @@ Namespace Geometry
             Next
         End Sub
 
+        Public Sub mapVector(ByRef vector As GPoint)
+            Dim num2 As Double = (vector.Y * Me._m21)
+            Dim num As Double = (vector.X * Me._m12)
+            Dim x = (vector.X * Me._m11)
+            x = (x + num2)
+            Dim y = (vector.Y * Me._m22)
+            y = (y + num)
 
+            vector.X = x
+            vector.Y = y
+        End Sub
     End Class
 End Namespace
