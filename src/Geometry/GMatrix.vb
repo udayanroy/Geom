@@ -149,15 +149,10 @@ Namespace Geometry
         End Sub
 
         Public Sub RoatateAt(ByVal angle As Double, ByVal centerX As Double, ByVal centerY As Double)
-            Dim radAngle = angle * deg2rad
+            Me.Translate(centerX, centerY)
+            Me.Roatate(angle)
+            Me.Translate(-centerX, -centerY)
 
-            Dim matrix As New GMatrix
-            Dim num2 As Double = Math.Sin(angle)
-            Dim num As Double = Math.Cos(angle)
-            Dim offsetX As Double = ((centerX * (1 - num)) + (centerY * num2))
-            Dim offsetY As Double = ((centerY * (1 - num)) - (centerX * num2))
-            matrix.setMatrix(num, num2, -num2, num, offsetX, offsetY)
-            Me.Multiply(matrix)
         End Sub
 
         Public Sub RoatateAt(ByVal angle As Double, ByVal center As GPoint)
