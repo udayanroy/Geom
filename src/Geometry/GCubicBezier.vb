@@ -375,16 +375,21 @@ Namespace Geometry
             dest = GPoint.lerp(abbc, bccd, t)
 
 
-            r.P1 = P1
-            r.C1 = ab
-            r.C2 = abbc
-            r.P2 = dest
+            r.P1 = dest
+            r.C1 = bccd
+            r.C2 = cd
+            r.P2 = P2
 
             Return r
         End Function
 
 
+        Public Function div(ByVal t1 As Double, ByVal t2 As Double) As GCubicBezier
+            Dim right = divRight(t1)
+            Dim left = divLeft(t2)
 
+            Return New GCubicBezier(right.P1, right.C1, left.C2, left.P2)
+        End Function
 
     End Structure
 
