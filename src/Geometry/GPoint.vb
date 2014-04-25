@@ -172,7 +172,10 @@ Namespace Geometry
         End Function
 
         Public Sub Transformation(ByVal mat As GMatrix)
-            mat.map(Me)
+            Dim tempP As New GPoint
+            tempP = Me
+            mat.map(tempP)
+            Me.SetValue(tempP)
         End Sub
 
     End Structure
