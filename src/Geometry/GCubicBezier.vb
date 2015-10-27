@@ -184,8 +184,8 @@ Namespace Geometry
 
             ' // bounding box corner coordinates
             Dim bbox As New GRect
-            bbox.point1.SetValue(minx, miny)
-            bbox.Point2.SetValue(maxx, maxy)
+            bbox.point1 = New GPoint(minx, miny)
+            bbox.Point2 = New GPoint(maxx, maxy)
 
             Return bbox
         End Function
