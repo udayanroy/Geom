@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Geom</id>
+    <version>0.1.1</version>
+    <title>Geom</title>
+    <authors>Udayan Roy</authors>
+    <owners>Udayan Roy</owners>   
+    <projectUrl>https://github.com/udayanroy/Geom</projectUrl>    
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Geometry lib for .Net</description>
+    <releaseNotes>Bug fixes</releaseNotes>
+    <copyright>Copyright 2013-2016 @Udayan Roy</copyright>
+    <tags>Geometry geom </tags>
+  </metadata>
+  
+  <files>
+      <file src="bin\Release\Geom.dll" target="lib" />
+  </files>
+</package>
