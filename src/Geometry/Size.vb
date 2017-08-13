@@ -30,17 +30,17 @@
 Namespace Geometry
 
 
-    Public Structure GSize
+    Public Structure Size
 
         Public Sub New(ByVal width As Double, ByVal height As Double)
             _Width = width
             _Height = height
         End Sub
-        Public Sub New(ByVal p As GPoint)
+        Public Sub New(ByVal p As Point)
             _Width = p.X
             _Height = p.Y
         End Sub
-        Public Sub New(ByVal p1 As GPoint, ByVal p2 As GPoint)
+        Public Sub New(ByVal p1 As Point, ByVal p2 As Point)
             _Width = p2.X - p1.X
             _Height = p2.Y - p1.Y
         End Sub

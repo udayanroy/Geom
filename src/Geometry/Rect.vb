@@ -29,14 +29,14 @@
 Namespace Geometry
 
 
-    Public Structure GRect
+    Public Structure Rect
 
-        Private P1 As GPoint
-        Private p2 As GPoint
+        Private P1 As Point
+        Private p2 As Point
 
 
 
-        Public Sub New(ByVal point1 As GPoint, ByVal point2 As GPoint)
+        Public Sub New(ByVal point1 As Point, ByVal point2 As Point)
             P1 = point1
             p2 = point2
         End Sub
@@ -45,12 +45,12 @@ Namespace Geometry
             p2.SetValue(x1, y1)
         End Sub
 
-        Public Sub New(ByVal location As GPoint, ByVal width As Double, ByVal height As Double)
+        Public Sub New(ByVal location As Point, ByVal width As Double, ByVal height As Double)
             P1.SetValue(location)
             p2.SetValue(P1.X + width, P1.Y + height)
         End Sub
 
-        Public Sub New(ByVal location As GPoint, ByVal size As GSize)
+        Public Sub New(ByVal location As Point, ByVal size As Size)
             P1.SetValue(location)
             p2.SetValue(P1.X + size.Width, P1.Y + size.Height)
         End Sub
@@ -59,38 +59,38 @@ Namespace Geometry
 
 
 
-        Public Property point1 As GPoint
+        Public Property point1 As Point
             Get
                 Return P1
 
             End Get
-            Set(ByVal value As GPoint)
+            Set(ByVal value As Point)
                 P1 = value
             End Set
         End Property
-        Public Property Point2 As GPoint
+        Public Property Point2 As Point
             Get
                 Return p2
             End Get
-            Set(ByVal value As GPoint)
+            Set(ByVal value As Point)
                 p2 = value
             End Set
         End Property
 
-        Public Property Location As GPoint
+        Public Property Location As Point
             Get
                 Return P1
             End Get
-            Set(ByVal value As GPoint)
+            Set(ByVal value As Point)
                 P1 = value
             End Set
         End Property
 
-        Public Property Size As GSize
+        Public Property Size As Size
             Get
-                Return New GSize(p2.X - P1.X, p2.Y - P1.Y)
+                Return New Size(p2.X - P1.X, p2.Y - P1.Y)
             End Get
-            Set(ByVal value As GSize)
+            Set(ByVal value As Size)
                 p2.X = P1.X + value.Width
                 p2.Y = P1.Y + value.Height
             End Set
@@ -169,12 +169,12 @@ Namespace Geometry
             Me.Height = height
 
         End Sub
-        Public Sub Offset(ByVal vector As GPoint)
+        Public Sub Offset(ByVal vector As Point)
             Offset(vector.X, vector.Y)
         End Sub
 
 
-        Public Function Contain(ByVal p As GPoint) As Boolean
+        Public Function Contain(ByVal p As Point) As Boolean
             If p.X < Me.Right And p.X > Me.Left Then
                 If p.Y > Me.Top And p.Y < Me.Bottom Then
                     Return True
@@ -184,13 +184,13 @@ Namespace Geometry
             Return False
         End Function
 
-        Public Function midpoint() As GPoint
-            Dim m As New GPoint(Me.Left + Me.Width / 2, Me.Top + Me.Height / 2)
+        Public Function midpoint() As Point
+            Dim m As New Point(Me.Left + Me.Width / 2, Me.Top + Me.Height / 2)
             Return m
         End Function
 
-        Public Function union(ByVal rect As GRect) As GRect
-            Dim ret As New GRect
+        Public Function union(ByVal rect As Rect) As Rect
+            Dim ret As New Rect
 
             ret.X = Math.Min(Me.Left, rect.Left)
             ret.Y = Math.Min(Me.Top, rect.Top)

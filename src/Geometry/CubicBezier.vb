@@ -30,53 +30,53 @@
 
 
 Namespace Geometry
-    Public Structure GCubicBezier
-        Private _p1, _p2, _c1, _c2 As GPoint
+    Public Structure CubicBezier
+        Private _p1, _p2, _c1, _c2 As Point
 
 
 
 
-        Public Sub New(ByVal p1 As GPoint, ByVal c1 As GPoint, ByVal c2 As GPoint, ByVal p2 As GPoint)
+        Public Sub New(ByVal p1 As Point, ByVal c1 As Point, ByVal c2 As Point, ByVal p2 As Point)
             _p1 = p1
             _p2 = p2
             _c1 = c1
             _c2 = c2
         End Sub
-        Public Property P1() As GPoint
+        Public Property P1() As Point
             Get
                 Return _p1
             End Get
-            Set(ByVal value As GPoint)
+            Set(ByVal value As Point)
                 _p1 = value
             End Set
         End Property
 
-        Public Property P2() As GPoint
+        Public Property P2() As Point
             Get
                 Return _p2
             End Get
-            Set(ByVal value As GPoint)
+            Set(ByVal value As Point)
                 _p2 = value
             End Set
         End Property
 
-        Public Property C1() As GPoint
+        Public Property C1() As Point
             Get
                 Return _c1
             End Get
-            Set(ByVal value As GPoint)
+            Set(ByVal value As Point)
                 _c1 = value
             End Set
         End Property
-        Public Property C2() As GPoint
+        Public Property C2() As Point
             Get
                 Return _c2
             End Get
-            Set(ByVal value As GPoint)
+            Set(ByVal value As Point)
                 _c2 = value
             End Set
         End Property
-        Default Public ReadOnly Property Points(ByVal i As Integer) As GPoint
+        Default Public ReadOnly Property Points(ByVal i As Integer) As Point
 
             Get
                 If i = 0 Then
@@ -104,8 +104,8 @@ Namespace Geometry
             mat.map(Me._c2)
         End Sub
 
-        Public Function pointATt(ByVal t As Double) As GPoint
-            Dim b As New GPoint
+        Public Function pointATt(ByVal t As Double) As Point
+            Dim b As New Point
             Dim mt = 1 - t
 
             b = (mt ^ 3) * _p1 + (3 * (mt ^ 2) * t) * _c1 + (3 * mt * (t ^ 2)) * _c2 + (t ^ 3) * _p2
@@ -113,13 +113,13 @@ Namespace Geometry
             Return b
         End Function
 
-        Public Function GetCozyBound() As GRect
+        Public Function GetCozyBound() As Rect
             Return Me.computeCubicBoundingBox(P1.X, P1.Y, C1.X, C1.Y, C2.X, C2.Y, P2.X, P2.Y)
         End Function
 
-        Public Function GetBound() As GRect
-            Dim r1 As New GRect(P1, P2)
-            Dim r2 As New GRect(C1, C2)
+        Public Function GetBound() As Rect
+            Dim r1 As New Rect(P1, P2)
+            Dim r2 As New Rect(C1, C2)
 
             Dim result = r1.union(r2)
 
@@ -143,7 +143,7 @@ Namespace Geometry
             End If
             Return ret
         End Function
-        Private Function computeCubicBoundingBox(ByVal xa As Single, ByVal ya As Single, ByVal xb As Single, ByVal yb As Single, ByVal xc As Single, ByVal yc As Single, ByVal xd As Single, ByVal yd As Single) As GRect
+        Private Function computeCubicBoundingBox(ByVal xa As Single, ByVal ya As Single, ByVal xb As Single, ByVal yb As Single, ByVal xc As Single, ByVal yc As Single, ByVal xd As Single, ByVal yd As Single) As Rect
 
             '// find the zero point for x and y in the derivatives
             Dim minx = 9999
@@ -183,9 +183,9 @@ Namespace Geometry
             Next
 
             ' // bounding box corner coordinates
-            Dim bbox As New GRect
-            bbox.point1 = New GPoint(minx, miny)
-            bbox.Point2 = New GPoint(maxx, maxy)
+            Dim bbox As New Rect
+            bbox.point1 = New Point(minx, miny)
+            bbox.Point2 = New Point(maxx, maxy)
 
             Return bbox
         End Function
@@ -243,7 +243,7 @@ Namespace Geometry
 
         End Function
 
-        Public Function closestPointToBezier(ByVal p As GPoint) As Single
+        Public Function closestPointToBezier(ByVal p As Point) As Single
 
 
 
@@ -268,14 +268,14 @@ Namespace Geometry
             Dim mindis = Double.MaxValue
             Dim mint As Double = Double.NaN
 
-            Dim dis0 = GPoint.Distance(P1, p)
-            Dim dis1 = GPoint.Distance(P2, p)
+            Dim dis0 = Point.Distance(P1, p)
+            Dim dis1 = Point.Distance(P2, p)
 
             For i = 0 To roots.Count - 1
                 t = roots(i)
 
                 Dim location = Me.pointATt(t)
-                Dim dist = GPoint.Distance(location, p)
+                Dim dist = Point.Distance(location, p)
                 If dist < mindis Then
                     mindis = dist
                     mint = t
@@ -295,7 +295,7 @@ Namespace Geometry
 
 
         End Function
-        Public Function DistancefromPoint(ByVal p As GPoint) As Double
+        Public Function DistancefromPoint(ByVal p As Point) As Double
 
 
             Dim d = P1
@@ -319,14 +319,14 @@ Namespace Geometry
             Dim mindis = Double.MaxValue
             Dim mint As Double = Double.NaN
 
-            Dim dis0 = GPoint.Distance(P1, p)
-            Dim dis1 = GPoint.Distance(P2, p)
+            Dim dis0 = Point.Distance(P1, p)
+            Dim dis1 = Point.Distance(P2, p)
 
             For i = 0 To roots.Count - 1
                 t = roots(i)
 
                 Dim location = Me.pointATt(t)
-                Dim dist = GPoint.Distance(location, p)
+                Dim dist = Point.Distance(location, p)
                 If dist < mindis Then
                     mindis = dist
                     mint = t
@@ -344,16 +344,16 @@ Namespace Geometry
                 End If
             End If
         End Function
-        Public Function divLeft(ByVal t As Double) As GCubicBezier
-            Dim r As New GCubicBezier
+        Public Function divLeft(ByVal t As Double) As CubicBezier
+            Dim r As New CubicBezier
 
-            Dim dest, ab, bc, cd, abbc, bccd As GPoint
-            ab = GPoint.lerp(P1, C1, t)
-            bc = GPoint.lerp(C1, C2, t)
-            cd = GPoint.lerp(C2, P2, t)
-            abbc = GPoint.lerp(ab, bc, t)
-            bccd = GPoint.lerp(bc, cd, t)
-            dest = GPoint.lerp(abbc, bccd, t)
+            Dim dest, ab, bc, cd, abbc, bccd As Point
+            ab = Point.lerp(P1, C1, t)
+            bc = Point.lerp(C1, C2, t)
+            cd = Point.lerp(C2, P2, t)
+            abbc = Point.lerp(ab, bc, t)
+            bccd = Point.lerp(bc, cd, t)
+            dest = Point.lerp(abbc, bccd, t)
 
 
             r.P1 = P1
@@ -363,16 +363,16 @@ Namespace Geometry
 
             Return r
         End Function
-        Public Function divRight(ByVal t As Double) As GCubicBezier
-            Dim r As New GCubicBezier
+        Public Function divRight(ByVal t As Double) As CubicBezier
+            Dim r As New CubicBezier
 
-            Dim dest, ab, bc, cd, abbc, bccd As GPoint
-            ab = GPoint.lerp(P1, C1, t)
-            bc = GPoint.lerp(C1, C2, t)
-            cd = GPoint.lerp(C2, P2, t)
-            abbc = GPoint.lerp(ab, bc, t)
-            bccd = GPoint.lerp(bc, cd, t)
-            dest = GPoint.lerp(abbc, bccd, t)
+            Dim dest, ab, bc, cd, abbc, bccd As Point
+            ab = Point.lerp(P1, C1, t)
+            bc = Point.lerp(C1, C2, t)
+            cd = Point.lerp(C2, P2, t)
+            abbc = Point.lerp(ab, bc, t)
+            bccd = Point.lerp(bc, cd, t)
+            dest = Point.lerp(abbc, bccd, t)
 
 
             r.P1 = dest
@@ -384,11 +384,11 @@ Namespace Geometry
         End Function
 
 
-        Public Function div(ByVal t1 As Double, ByVal t2 As Double) As GCubicBezier
+        Public Function div(ByVal t1 As Double, ByVal t2 As Double) As CubicBezier
             Dim right = divRight(t1)
             Dim left = divLeft(t2)
 
-            Return New GCubicBezier(right.P1, right.C1, left.C2, left.P2)
+            Return New CubicBezier(right.P1, right.C1, left.C2, left.P2)
         End Function
 
     End Structure

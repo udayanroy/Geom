@@ -62,12 +62,12 @@
     <Import Include="System.Diagnostics" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Geometry\GCubicBezier.vb" />
+    <Compile Include="Geometry\CubicBezier.vb" />
     <Compile Include="Geometry\GMatrix.vb" />
     <Compile Include="Geometry\GPath.vb" />
-    <Compile Include="Geometry\GPoint.vb" />
-    <Compile Include="Geometry\GRect.vb" />
-    <Compile Include="Geometry\GSize.vb" />
+    <Compile Include="Geometry\Point.vb" />
+    <Compile Include="Geometry\Rect.vb" />
+    <Compile Include="Geometry\Size.vb" />
     <Compile Include="Intersection.vb" />
     <Compile Include="Polygon.vb" />
     <Compile Include="Polynomial.vb" />

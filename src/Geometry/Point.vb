@@ -30,7 +30,7 @@
 
 Namespace Geometry
 
-    Public Structure GPoint
+    Public Structure Point
 
         Private x1, y1 As Double
 
@@ -71,7 +71,7 @@ Namespace Geometry
             Me.y1 = y
 
         End Sub
-        Public Sub SetValue(ByVal p As GPoint)
+        Public Sub SetValue(ByVal p As Point)
             Me.x1 = p.X
             Me.y1 = p.Y
 
@@ -83,7 +83,7 @@ Namespace Geometry
         End Function
 
 #Region "Operator Overloading "
-        Public Function Dot(ByVal p2 As GPoint) As Double
+        Public Function Dot(ByVal p2 As Point) As Double
             Return X * p2.X + Y * p2.Y
         End Function
 
@@ -91,79 +91,79 @@ Namespace Geometry
 
 
 
-        Public Shared Operator +(ByVal p1 As GPoint, ByVal p2 As GPoint) As GPoint
-            Return New GPoint(p1.X + p2.X, p1.Y + p2.Y)
+        Public Shared Operator +(ByVal p1 As Point, ByVal p2 As Point) As Point
+            Return New Point(p1.X + p2.X, p1.Y + p2.Y)
         End Operator
-        Public Shared Operator -(ByVal p1 As GPoint, ByVal p2 As GPoint) As GPoint
-            Return New GPoint(p1.X - p2.X, p1.Y - p2.Y)
+        Public Shared Operator -(ByVal p1 As Point, ByVal p2 As Point) As Point
+            Return New Point(p1.X - p2.X, p1.Y - p2.Y)
         End Operator
-        Public Shared Operator *(ByVal p1 As GPoint, ByVal p2 As GPoint) As GPoint
-            Return New GPoint(p1.X * p2.X, p1.Y * p2.Y)
-        End Operator
-
-        Public Shared Operator /(ByVal p1 As GPoint, ByVal p2 As GPoint) As GPoint
-            Return New GPoint(p1.X / p2.X, p1.Y / p2.Y)
+        Public Shared Operator *(ByVal p1 As Point, ByVal p2 As Point) As Point
+            Return New Point(p1.X * p2.X, p1.Y * p2.Y)
         End Operator
 
-        Public Shared Operator >=(ByVal p1 As GPoint, ByVal p2 As GPoint) As Boolean
+        Public Shared Operator /(ByVal p1 As Point, ByVal p2 As Point) As Point
+            Return New Point(p1.X / p2.X, p1.Y / p2.Y)
+        End Operator
+
+        Public Shared Operator >=(ByVal p1 As Point, ByVal p2 As Point) As Boolean
             Return (p1.X >= p2.X And p1.Y >= p2.Y)
         End Operator
-        Public Shared Operator <=(ByVal p1 As GPoint, ByVal p2 As GPoint) As Boolean
+        Public Shared Operator <=(ByVal p1 As Point, ByVal p2 As Point) As Boolean
             Return (p1.X <= p2.X And p1.Y <= p2.Y)
         End Operator
 
-        Public Shared Operator +(ByVal p1 As GPoint, ByVal n As Double) As GPoint
-            Return New GPoint(p1.X + n, p1.Y + n)
+        Public Shared Operator +(ByVal p1 As Point, ByVal n As Double) As Point
+            Return New Point(p1.X + n, p1.Y + n)
         End Operator
-        Public Shared Operator -(ByVal p1 As GPoint, ByVal n As Double) As GPoint
-            Return New GPoint(p1.X - n, p1.Y - n)
+        Public Shared Operator -(ByVal p1 As Point, ByVal n As Double) As Point
+            Return New Point(p1.X - n, p1.Y - n)
         End Operator
-        Public Shared Operator *(ByVal n As Double, ByVal p1 As GPoint) As GPoint
-            Return New GPoint(p1.X * n, p1.Y * n)
+        Public Shared Operator *(ByVal n As Double, ByVal p1 As Point) As Point
+            Return New Point(p1.X * n, p1.Y * n)
         End Operator
-        Public Shared Operator *(ByVal p1 As GPoint, ByVal n As Double) As GPoint
-            Return New GPoint(p1.X * n, p1.Y * n)
+        Public Shared Operator *(ByVal p1 As Point, ByVal n As Double) As Point
+            Return New Point(p1.X * n, p1.Y * n)
         End Operator
-        Public Shared Operator /(ByVal p1 As GPoint, ByVal n As Double) As GPoint
-            Return New GPoint(p1.X / n, p1.Y / n)
-        End Operator
-
-        Public Shared Operator /(ByVal n As Double, ByVal p1 As GPoint) As GPoint
-            Return New GPoint(n / p1.X, n / p1.Y)
+        Public Shared Operator /(ByVal p1 As Point, ByVal n As Double) As Point
+            Return New Point(p1.X / n, p1.Y / n)
         End Operator
 
-        Public Shared Operator -(ByVal p1 As GPoint) As GPoint
-            Return New GPoint(-p1.X, -p1.Y)
+        Public Shared Operator /(ByVal n As Double, ByVal p1 As Point) As Point
+            Return New Point(n / p1.X, n / p1.Y)
         End Operator
 
-
+        Public Shared Operator -(ByVal p1 As Point) As Point
+            Return New Point(-p1.X, -p1.Y)
+        End Operator
 
 
 
-        Public Shared Function lerp(ByVal p1 As GPoint, ByVal p2 As GPoint, ByVal t As Double) As GPoint
-            Return New GPoint(p1.X + (p2.X - p1.X) * t, p1.Y + (p2.Y - p1.Y) * t)
+
+
+        Public Shared Function lerp(ByVal p1 As Point, ByVal p2 As Point, ByVal t As Double) As Point
+            Return New Point(p1.X + (p2.X - p1.X) * t, p1.Y + (p2.Y - p1.Y) * t)
         End Function
-        Public Shared Function Dot(ByVal p1 As GPoint, ByVal p2 As GPoint) As Double
+        Public Shared Function Dot(ByVal p1 As Point, ByVal p2 As Point) As Double
             Return p1.X * p2.X + p1.Y * p2.Y
         End Function
-        Public Shared Function Cross(ByVal p1 As GPoint, ByVal p2 As GPoint) As Double
+        Public Shared Function Cross(ByVal p1 As Point, ByVal p2 As Point) As Double
             Return Dot(p1, CW(p2))
         End Function
-        Public Shared Function CW(ByVal P As GPoint) As GPoint
-            Return New GPoint(-P.Y, P.X)
+        Public Shared Function CW(ByVal P As Point) As Point
+            Return New Point(-P.Y, P.X)
         End Function
 
-        Public Function Min(ByVal pt As GPoint) As GPoint
-            Return New GPoint(Math.Min(Me.X, pt.X), Math.Min(Me.Y, pt.Y))
+        Public Function Min(ByVal pt As Point) As Point
+            Return New Point(Math.Min(Me.X, pt.X), Math.Min(Me.Y, pt.Y))
         End Function
-        Public Function Max(ByVal pt As GPoint) As GPoint
-            Return New GPoint(Math.Max(Me.X, pt.X), Math.Max(Me.Y, pt.Y))
+        Public Function Max(ByVal pt As Point) As Point
+            Return New Point(Math.Max(Me.X, pt.X), Math.Max(Me.Y, pt.Y))
         End Function
 
 
 #End Region
 
-        Public Shared Function Distance(ByVal p1 As GPoint, ByVal p2 As GPoint) As Double
+        Public Shared Function Distance(ByVal p1 As Point, ByVal p2 As Point) As Double
             Return Math.Sqrt((p2.X - p1.X) ^ 2 + (p2.Y - p1.Y) ^ 2)
         End Function
 
@@ -172,7 +172,7 @@ Namespace Geometry
         End Function
 
         Public Sub Transformation(ByVal mat As GMatrix)
-            Dim tempP As New GPoint
+            Dim tempP As New Point
             tempP = Me
             mat.map(tempP)
             Me.SetValue(tempP)

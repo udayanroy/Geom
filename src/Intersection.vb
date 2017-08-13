@@ -2,28 +2,28 @@
 Namespace Geometry
     Public Class Intersection
         Private nc As Integer
-        Private _points As List(Of GPoint)
+        Private _points As List(Of Point)
         Private status As String
 
 
         Private Sub New()
             nc = 0
-            _points = New List(Of GPoint)
+            _points = New List(Of Point)
         End Sub
         Private Sub New(ByVal status As String)
             nc = 0
-            _points = New List(Of GPoint)
+            _points = New List(Of Point)
             status = status
         End Sub
         Public Function nCount() As Integer
             Return _points.Count
         End Function
-        Public Function Ipoint(ByVal i As Integer) As gPoint
+        Public Function Ipoint(ByVal i As Integer) As Point
             If nCount() = 0 Then Return Nothing
             Return _points(i)
         End Function
 
-        Public ReadOnly Property Points As List(Of GPoint)
+        Public ReadOnly Property Points As List(Of Point)
             Get
                 Return _points
             End Get
@@ -33,16 +33,16 @@ Namespace Geometry
             Return status
         End Function
 
-        Private Sub AddPoint(ByVal pnt As GPoint)
+        Private Sub AddPoint(ByVal pnt As Point)
             nc += 1
             _points.Add(pnt)
         End Sub
-        Private Sub appendPoints(ByVal pnts As List(Of GPoint))
+        Private Sub appendPoints(ByVal pnts As List(Of Point))
 
             _points.AddRange(pnts)
         End Sub
 
-        Public Shared Function intersectLineLine(ByVal a1 As GPoint, ByVal a2 As GPoint, ByVal b1 As GPoint, ByVal b2 As GPoint) As Intersection
+        Public Shared Function intersectLineLine(ByVal a1 As Point, ByVal a2 As Point, ByVal b1 As Point, ByVal b2 As Point) As Intersection
             Dim result As New Intersection()
 
             Dim ua_t As Double = (b2.X - b1.X) * (a1.Y - b1.Y) - (b2.Y - b1.Y) * (a1.X - b1.X)
@@ -55,7 +55,7 @@ Namespace Geometry
 
                 If (0 <= ua And ua <= 1 And 0 <= ub And ub <= 1) Then
                     'result = new Intersection("Intersection");
-                    result.AddPoint(New GPoint(a1.X + ua * (a2.X - a1.X), a1.Y + ua * (a2.Y - a1.Y)))
+                    result.AddPoint(New Point(a1.X + ua * (a2.X - a1.X), a1.Y + ua * (a2.Y - a1.Y)))
 
 
                     result.status = "No Intersection"
@@ -73,10 +73,10 @@ Namespace Geometry
 
 
 
-        Public Shared Function intersectBezier2Bezier2(ByVal a1 As GPoint, ByVal a2 As GPoint, ByVal a3 As GPoint, ByVal b1 As GPoint, ByVal b2 As GPoint, ByVal b3 As GPoint) As Intersection
-            Dim a, b As GPoint               '// temporary variables
-            Dim c12, c11, c10 As GPoint     '// curve one coefficients
-            Dim c22, c21, c20 As GPoint      '// curve two coefficients
+        Public Shared Function intersectBezier2Bezier2(ByVal a1 As Point, ByVal a2 As Point, ByVal a3 As Point, ByVal b1 As Point, ByVal b2 As Point, ByVal b3 As Point) As Intersection
+            Dim a, b As Point               '// temporary variables
+            Dim c12, c11, c10 As Point     '// curve one coefficients
+            Dim c22, c21, c20 As Point      '// curve two coefficients
             Dim TOLERANCE = 0.0001   '// determines when two roots are considered equal
 
             Dim result As New Intersection("No Intersection")
@@ -91,7 +91,7 @@ Namespace Geometry
             b = a2 * 2
             c11 = a + b
 
-            c10 = New GPoint(a1.X, a1.Y)
+            c10 = New Point(a1.X, a1.Y)
 
             '// calculate curve two
             a = b2 * (-2)
@@ -101,7 +101,7 @@ Namespace Geometry
             b = b2 * (2)
             c21 = a + (b)
 
-            c20 = New GPoint(b1.X, b1.Y)
+            c20 = New Point(b1.X, b1.Y)
 
             '// build sub-expressions used to build polynomial
             ' // these were calculated via a Bezout resultant
@@ -217,14 +217,14 @@ Namespace Geometry
             Return result
         End Function
 
-        Public Shared Function intersectBezier3Bezier3(ByVal a1 As GPoint, ByVal a2 As GPoint, _
-                     ByVal a3 As GPoint, ByVal a4 As GPoint, ByVal b1 As GPoint, _
-                     ByVal b2 As GPoint, ByVal b3 As GPoint, ByVal b4 As GPoint) As Intersection
+        Public Shared Function intersectBezier3Bezier3(ByVal a1 As Point, ByVal a2 As Point, _
+                     ByVal a3 As Point, ByVal a4 As Point, ByVal b1 As Point, _
+                     ByVal b2 As Point, ByVal b3 As Point, ByVal b4 As Point) As Intersection
 
 
-            Dim a, b, c, d As GPoint         '// temporary variables
-            Dim c13, c12, c11, c10 As GPoint '// coefficients of cubic
-            Dim c23, c22, c21, c20 As GPoint '// coefficients of cubic
+            Dim a, b, c, d As Point         '// temporary variables
+            Dim c13, c12, c11, c10 As Point '// coefficients of cubic
+            Dim c23, c22, c21, c20 As Point '// coefficients of cubic
             Dim result = New Intersection("No Intersection")
 
             '// Calculate the coefficients of cubic polynomial
@@ -232,39 +232,39 @@ Namespace Geometry
             b = a2 * (3)
             c = a3 * (-3)
             d = a + (b + (c + (a4)))
-            c13 = New GPoint(d.X, d.Y)
+            c13 = New Point(d.X, d.Y)
 
             a = a1 * (3)
             b = a2 * (-6)
             c = a3 * (3)
             d = a + (b + (c))
-            c12 = New GPoint(d.X, d.Y)
+            c12 = New Point(d.X, d.Y)
 
             a = a1 * (-3)
             b = a2 * (3)
             c = a + (b)
-            c11 = New GPoint(c.X, c.Y)
+            c11 = New Point(c.X, c.Y)
 
-            c10 = New GPoint(a1.X, a1.Y)
+            c10 = New Point(a1.X, a1.Y)
 
             a = b1 * (-1)
             b = b2 * (3)
             c = b3 * (-3)
             d = a + (b + (c + (b4)))
-            c23 = New GPoint(d.X, d.Y)
+            c23 = New Point(d.X, d.Y)
 
             a = b1 * (3)
             b = b2 * (-6)
             c = b3 * (3)
             d = a + (b + (c))
-            c22 = New GPoint(d.X, d.Y)
+            c22 = New Point(d.X, d.Y)
 
             a = b1 * (-3)
             b = b2 * (3)
             c = a + (b)
-            c21 = New GPoint(c.X, c.Y)
+            c21 = New Point(c.X, c.Y)
 
-            c20 = New GPoint(b1.X, b1.Y)
+            c20 = New Point(b1.X, b1.Y)
 
             Dim c10x2 = c10.X * c10.X
             Dim c10x3 = c10.X * c10.X * c10.X
@@ -530,11 +530,11 @@ Namespace Geometry
         ''*   intersectBezier2Line
         '*
         '*****/
-        Public Shared Function intersectBezier2Line(ByVal p1 As GPoint, ByVal p2 As GPoint, ByVal p3 As GPoint, ByVal a1 As GPoint, ByVal a2 As GPoint) As Intersection
-            Dim a, b As GPoint           '// temporary variables
-            Dim c2, c1, c0 As GPoint     '// coefficients of quadratic
+        Public Shared Function intersectBezier2Line(ByVal p1 As Point, ByVal p2 As Point, ByVal p3 As Point, ByVal a1 As Point, ByVal a2 As Point) As Intersection
+            Dim a, b As Point           '// temporary variables
+            Dim c2, c1, c0 As Point     '// coefficients of quadratic
             Dim cl As Double             '// c coefficient for normal form of line
-            Dim n As GPoint            '// normal for normal form of line
+            Dim n As Point            '// normal for normal form of line
             Dim min = a1.Min(a2) '// used to determine if point is on line segment
             Dim max = a1.Max(a2) '// used to determine if point is on line segment
             Dim result = New Intersection("No Intersection")
@@ -546,18 +546,18 @@ Namespace Geometry
             b = p2 * 2
             c1 = a + b
 
-            c0 = New GPoint(p1.X, p1.Y)
+            c0 = New Point(p1.X, p1.Y)
 
             '// Convert line to normal form: ax + by + c = 0
             '// Find normal to line: negative inverse of original line's slope
-            n = New GPoint(a1.Y - a2.Y, a2.X - a1.X)
+            n = New Point(a1.Y - a2.Y, a2.X - a1.X)
 
             '// Determine new c coefficient
             cl = a1.X * a2.Y - a2.X * a1.Y
 
             '// Transform cubic coefficients to line's coordinate system and find roots
             '// of cubic
-            Dim roots = New Polynomial(GPoint.Dot(n, c2), GPoint.Dot(n, c1), GPoint.Dot(n, c0) + cl).getRoots()  ' pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp
+            Dim roots = New Polynomial(Point.Dot(n, c2), Point.Dot(n, c1), Point.Dot(n, c0) + cl).getRoots()  ' pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp
 
             '// Any roots in closed interval [0,1] are intersections on Bezier, but
             '// might not be on the line segment.
@@ -568,10 +568,10 @@ Namespace Geometry
                 If (0 <= t And t <= 1) Then
                     '// We're within the Bezier curve
                     '// Find point on Bezier
-                    Dim p4 = GPoint.lerp(p1, p2, t)
-                    Dim p5 = GPoint.lerp(p2, p3, t)
+                    Dim p4 = Point.lerp(p1, p2, t)
+                    Dim p5 = Point.lerp(p2, p3, t)
 
-                    Dim p6 = GPoint.lerp(p4, p5, t)
+                    Dim p6 = Point.lerp(p4, p5, t)
 
                     '// See if point is on line segment
                     '// Had to make special cases for vertical and horizontal lines due
@@ -605,7 +605,7 @@ Namespace Geometry
         '*   intersectBezier2Polygon
         '*
         '*****/
-        Public Shared Function intersectBezier2Polygon(ByVal p1 As GPoint, ByVal p2 As GPoint, ByVal p3 As GPoint, ByRef points As GPoint()) As Intersection
+        Public Shared Function intersectBezier2Polygon(ByVal p1 As Point, ByVal p2 As Point, ByVal p3 As Point, ByRef points As Point()) As Intersection
             Dim result = New Intersection("No Intersection")
             Dim length As Double = points.Length
 
@@ -632,12 +632,12 @@ Namespace Geometry
         '*   intersectBezier2Rectangle
         '*
         '*****/
-        Public Shared Function intersectBezier2Rectangle(ByVal p1 As GPoint, ByVal p2 As GPoint, _
-                                    ByVal p3 As GPoint, ByVal r1 As GPoint, ByVal r2 As GPoint) As Intersection
+        Public Shared Function intersectBezier2Rectangle(ByVal p1 As Point, ByVal p2 As Point, _
+                                    ByVal p3 As Point, ByVal r1 As Point, ByVal r2 As Point) As Intersection
             Dim min = r1.Min(r2)
             Dim max = r1.Max(r2)
-            Dim topRight = New GPoint(max.X, min.Y)
-            Dim bottomLeft = New GPoint(min.X, max.Y)
+            Dim topRight = New Point(max.X, min.Y)
+            Dim bottomLeft = New Point(min.X, max.Y)
 
             Dim inter1 = Intersection.intersectBezier2Line(p1, p2, p3, min, topRight)
             Dim inter2 = Intersection.intersectBezier2Line(p1, p2, p3, topRight, max)
@@ -661,7 +661,7 @@ Namespace Geometry
         '*   intersectLinePolygon
         '*
         '*****/
-        Public Shared Function intersectLinePolygon(ByVal a1 As GPoint, ByVal a2 As GPoint, ByRef points As GPoint()) As Intersection
+        Public Shared Function intersectLinePolygon(ByVal a1 As Point, ByVal a2 As Point, ByRef points As Point()) As Intersection
             Dim result = New Intersection("No Intersection")
             Dim length = points.Length
 
@@ -684,11 +684,11 @@ Namespace Geometry
         '*   intersectLineRectangle
         '*
         '*****/
-        Public Shared Function intersectLineRectangle(ByVal a1 As GPoint, ByVal a2 As GPoint, ByVal r1 As GPoint, ByVal r2 As GPoint) As Intersection
+        Public Shared Function intersectLineRectangle(ByVal a1 As Point, ByVal a2 As Point, ByVal r1 As Point, ByVal r2 As Point) As Intersection
             Dim min = r1.Min(r2)
             Dim max = r1.Max(r2)
-            Dim topRight = New GPoint(max.X, min.Y)
-            Dim bottomLeft = New GPoint(min.X, max.Y)
+            Dim topRight = New Point(max.X, min.Y)
+            Dim bottomLeft = New Point(min.X, max.Y)
 
             Dim inter1 = Intersection.intersectLineLine(min, topRight, a1, a2)
             Dim inter2 = Intersection.intersectLineLine(topRight, max, a1, a2)
@@ -712,7 +712,7 @@ Namespace Geometry
         '*   intersectPolygonPolygon
         '*
         '*****/
-        Public Shared Function intersectPolygonPolygon(ByRef points1 As GPoint(), ByRef points2 As GPoint()) As Intersection
+        Public Shared Function intersectPolygonPolygon(ByRef points1 As Point(), ByRef points2 As Point()) As Intersection
             Dim result = New Intersection("No Intersection")
             Dim length = points1.Length
 
@@ -729,11 +729,11 @@ Namespace Geometry
 
         End Function
 
-        Public Shared Function intersectPolygonRectangle(ByRef points As GPoint(), ByVal r1 As GPoint, ByVal r2 As GPoint) As Intersection
+        Public Shared Function intersectPolygonRectangle(ByRef points As Point(), ByVal r1 As Point, ByVal r2 As Point) As Intersection
             Dim min = r1.Min(r2)
             Dim max = r1.Max(r2)
-            Dim topRight = New GPoint(max.X, min.Y)
-            Dim bottomLeft = New GPoint(min.X, max.Y)
+            Dim topRight = New Point(max.X, min.Y)
+            Dim bottomLeft = New Point(min.X, max.Y)
 
             Dim inter1 = Intersection.intersectLinePolygon(min, topRight, points)
             Dim inter2 = Intersection.intersectLinePolygon(topRight, max, points)
@@ -757,11 +757,11 @@ Namespace Geometry
         '*   intersectRectangleRectangle
         '*
         '*****/
-        Public Shared Function intersectRectangleRectangle(ByVal a1 As GPoint, ByVal a2 As GPoint, ByVal b1 As GPoint, ByVal b2 As GPoint)
+        Public Shared Function intersectRectangleRectangle(ByVal a1 As Point, ByVal a2 As Point, ByVal b1 As Point, ByVal b2 As Point)
             Dim min = a1.Min(a2)
             Dim max = a1.Max(a2)
-            Dim topRight = New GPoint(max.X, min.Y)
-            Dim bottomLeft = New GPoint(min.X, max.Y)
+            Dim topRight = New Point(max.X, min.Y)
+            Dim bottomLeft = New Point(min.X, max.Y)
 
             Dim inter1 = Intersection.intersectLineRectangle(min, topRight, b1, b2)
             Dim inter2 = Intersection.intersectLineRectangle(topRight, max, b1, b2)
@@ -790,12 +790,12 @@ Namespace Geometry
         '*   would have figured out this intersection problem.
         '*
         '*****/
-        Public Shared Function intersectBezier3Line(ByVal p1 As GPoint, ByVal p2 As GPoint, _
-                        ByVal p3 As GPoint, ByVal p4 As GPoint, ByVal a1 As GPoint, ByVal a2 As GPoint) As Intersection
-            Dim a, b, c, d As GPoint      '// temporary variables
-            Dim c3, c2, c1, c0 As GPoint '// coefficients of cubic
+        Public Shared Function intersectBezier3Line(ByVal p1 As Point, ByVal p2 As Point, _
+                        ByVal p3 As Point, ByVal p4 As Point, ByVal a1 As Point, ByVal a2 As Point) As Intersection
+            Dim a, b, c, d As Point      '// temporary variables
+            Dim c3, c2, c1, c0 As Point '// coefficients of cubic
             Dim cl          '// c coefficient for normal form of line
-            Dim n As GPoint           '// normal for normal form of line
+            Dim n As Point           '// normal for normal form of line
             Dim min = a1.Min(a2) '// used to determine if point is on line segment
             Dim max = a1.Max(a2) '// used to determine if point is on line segment
             Dim result = New Intersection("No Intersection")
@@ -815,24 +815,24 @@ Namespace Geometry
             b = p2 * (3)
             c = p3 * (-3)
             d = a + (b + (c + (p4)))
-            c3 = New GPoint(d.X, d.Y)
+            c3 = New Point(d.X, d.Y)
 
             a = p1 * (3)
             b = p2 * (-6)
             c = p3 * (3)
             d = a + (b + (c))
-            c2 = New GPoint(d.X, d.Y)
+            c2 = New Point(d.X, d.Y)
 
             a = p1 * (-3)
             b = p2 * (3)
             c = a + (b)
-            c1 = New GPoint(c.X, c.Y)
+            c1 = New Point(c.X, c.Y)
 
-            c0 = New GPoint(p1.X, p1.Y)
+            c0 = New Point(p1.X, p1.Y)
 
             '// Convert line to normal form: ax + by + c = 0
             '// Find normal to line: negative inverse of original line's slope
-            n = New GPoint(a1.Y - a2.Y, a2.X - a1.X)
+            n = New Point(a1.Y - a2.Y, a2.X - a1.X)
 
             '// Determine new c coefficient
             cl = a1.X * a2.Y - a2.X * a1.Y
@@ -855,14 +855,14 @@ Namespace Geometry
                 If (0 <= t And t <= 1) Then
                     '// We're within the Bezier curve
                     '// Find point on Bezier
-                    Dim p5 = GPoint.lerp(p1, p2, t)
-                    Dim p6 = GPoint.lerp(p2, p3, t)
-                    Dim p7 = GPoint.lerp(p3, p4, t)
+                    Dim p5 = Point.lerp(p1, p2, t)
+                    Dim p6 = Point.lerp(p2, p3, t)
+                    Dim p7 = Point.lerp(p3, p4, t)
 
-                    Dim p8 = GPoint.lerp(p5, p6, t)
-                    Dim p9 = GPoint.lerp(p6, p7, t)
+                    Dim p8 = Point.lerp(p5, p6, t)
+                    Dim p9 = Point.lerp(p6, p7, t)
 
-                    Dim p10 = GPoint.lerp(p8, p9, t)
+                    Dim p10 = Point.lerp(p8, p9, t)
 
                     '// See if point is on line segment
                     '// Had to make special cases for vertical and horizontal lines due
@@ -892,8 +892,8 @@ Namespace Geometry
         '*   intersectBezier3Polygon
         '*
         '*****/
-        Public Shared Function intersectBezier3Polygon(ByVal p1 As GPoint, ByVal p2 As GPoint, _
-                                    ByVal p3 As GPoint, ByVal p4 As GPoint, ByVal points As GPoint()) As Intersection
+        Public Shared Function intersectBezier3Polygon(ByVal p1 As Point, ByVal p2 As Point, _
+                                    ByVal p3 As Point, ByVal p4 As Point, ByVal points As Point()) As Intersection
             Dim result = New Intersection("No Intersection")
             Dim length = points.Length
 
@@ -917,12 +917,12 @@ Namespace Geometry
         '*   intersectBezier3Rectangle
         '*
         '*****/
-        Public Shared Function intersectBezier3Rectangle(ByVal p1 As GPoint, ByVal p2 As GPoint, _
-                                        ByVal p3 As GPoint, ByVal p4 As GPoint, ByVal r1 As GPoint, ByVal r2 As GPoint)
+        Public Shared Function intersectBezier3Rectangle(ByVal p1 As Point, ByVal p2 As Point, _
+                                        ByVal p3 As Point, ByVal p4 As Point, ByVal r1 As Point, ByVal r2 As Point)
             Dim min = r1.Min(r2)
             Dim max = r1.Max(r2)
-            Dim topRight = New GPoint(max.X, min.Y)
-            Dim bottomLeft = New GPoint(min.X, max.Y)
+            Dim topRight = New Point(max.X, min.Y)
+            Dim bottomLeft = New Point(min.X, max.Y)
 
             Dim inter1 = Intersection.intersectBezier3Line(p1, p2, p3, p4, min, topRight)
             Dim inter2 = Intersection.intersectBezier3Line(p1, p2, p3, p4, topRight, max)
@@ -945,12 +945,12 @@ Namespace Geometry
         '*   intersectBezier2Bezier3
         '*
         '*****/
-        Public Shared Function intersectBezier2Bezier3(ByVal a1 As GPoint, ByVal a2 As GPoint, _
-                        ByVal a3 As GPoint, ByVal b1 As GPoint, ByVal b2 As GPoint, ByVal b3 As GPoint, ByVal b4 As GPoint) As Intersection
+        Public Shared Function intersectBezier2Bezier3(ByVal a1 As Point, ByVal a2 As Point, _
+                        ByVal a3 As Point, ByVal b1 As Point, ByVal b2 As Point, ByVal b3 As Point, ByVal b4 As Point) As Intersection
 
-            Dim a, b, c, d As GPoint
-            Dim c12, c11, c10 As GPoint
-            Dim c23, c22, c21, c20 As GPoint
+            Dim a, b, c, d As Point
+            Dim c12, c11, c10 As Point
+            Dim c23, c22, c21, c20 As Point
             Dim result = New Intersection("No Intersection")
 
             a = a2 * (-2)
@@ -960,26 +960,26 @@ Namespace Geometry
             b = a2 * (2)
             c11 = a + (b)
 
-            c10 = New GPoint(a1.X, a1.Y)
+            c10 = New Point(a1.X, a1.Y)
 
             a = b1 * (-1)
             b = b2 * (3)
             c = b3 * (-3)
             d = a + (b + (c + (b4)))
-            c23 = New GPoint(d.X, d.Y)
+            c23 = New Point(d.X, d.Y)
 
             a = b1 * (3)
             b = b2 * (-6)
             c = b3 * (3)
             d = a + (b + (c))
-            c22 = New GPoint(d.X, d.Y)
+            c22 = New Point(d.X, d.Y)
 
             a = b1 * (-3)
             b = b2 * (3)
             c = a + (b)
-            c21 = New GPoint(c.X, c.Y)
+            c21 = New Point(c.X, c.Y)
 
-            c20 = New GPoint(b1.X, b1.Y)
+            c20 = New Point(b1.X, b1.Y)
 
             Dim c10x2 = c10.X * c10.X
             Dim c10y2 = c10.Y * c10.Y

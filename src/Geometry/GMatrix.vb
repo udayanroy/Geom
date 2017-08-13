@@ -155,7 +155,7 @@ Namespace Geometry
 
         End Sub
 
-        Public Sub RoatateAt(ByVal angle As Double, ByVal center As GPoint)
+        Public Sub RoatateAt(ByVal angle As Double, ByVal center As Point)
             Me.RoatateAt(angle, center.X, center.Y)
         End Sub
 
@@ -182,20 +182,20 @@ Namespace Geometry
             Me.setMatrix(tm11, tm12, tm21, tm22, tdx, tdy)
         End Sub
 
-        Public Sub map(ByRef p As GPoint)
+        Public Sub map(ByRef p As Point)
             Dim fx = _m11 * p.X + _m21 * p.Y + _dx
             Dim fy = _m12 * p.X + _m22 * p.Y + _dy
             p.X = fx
             p.Y = fy
         End Sub
 
-        Public Sub map(ByRef points As GPoint())
-            For Each p As GPoint In points
+        Public Sub map(ByRef points As Point())
+            For Each p As Point In points
                 Me.map(p)
             Next
         End Sub
 
-        Public Sub mapVector(ByRef vector As GPoint)
+        Public Sub mapVector(ByRef vector As Point)
             Dim num2 As Double = (vector.Y * Me._m21)
             Dim num As Double = (vector.X * Me._m12)
             Dim x = (vector.X * Me._m11)

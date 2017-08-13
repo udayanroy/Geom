@@ -46,7 +46,7 @@ Namespace Geometry
         'Every shape has added will be a SubPath.
 
         'Add a subpath of line.
-        Public Sub AddLine(ByVal p1 As GPoint, ByVal p2 As GPoint)
+        Public Sub AddLine(ByVal p1 As Point, ByVal p2 As Point)
             Dim sp As New SubPath
 
             Dim pp1 As New PathPoint(p1)
@@ -57,10 +57,10 @@ Namespace Geometry
 
             Me.spaths.Add(sp)
         End Sub
-        Public Sub AddLines(ByVal points() As GPoint)
+        Public Sub AddLines(ByVal points() As Point)
             Dim sp As New SubPath
 
-            For Each p As GPoint In points
+            For Each p As Point In points
                 Dim pp As New PathPoint(p)
                 sp.Points.Add(pp)
             Next
@@ -69,30 +69,30 @@ Namespace Geometry
         End Sub
 
         'Add a subpath of Rectangle
-        Public Sub AddRectangle(ByVal rect As GRect)
+        Public Sub AddRectangle(ByVal rect As Rect)
             Me.AddRectangle(rect.X, rect.Y, rect.Width, rect.Height)
         End Sub
         Public Sub AddRectangle(ByVal x As Single, ByVal y As Single, ByVal Width As Single, ByVal Height As Single)
             Dim sp As New SubPath
             sp.Closed = True
 
-            Dim p1 As New PathPoint(New GPoint(x, y))
+            Dim p1 As New PathPoint(New Point(x, y))
             sp.Points.Add(p1)
-            Dim p2 As New PathPoint(New GPoint(x + Width, y))
+            Dim p2 As New PathPoint(New Point(x + Width, y))
             sp.Points.Add(p2)
-            Dim p3 As New PathPoint(New GPoint(x + Width, y + Height))
+            Dim p3 As New PathPoint(New Point(x + Width, y + Height))
             sp.Points.Add(p3)
-            Dim p4 As New PathPoint(New GPoint(x, y + Height))
+            Dim p4 As New PathPoint(New Point(x, y + Height))
             sp.Points.Add(p4)
 
             Me.spaths.Add(sp)
         End Sub
-        Public Sub AddRectangle(ByVal p1 As GPoint, ByVal p2 As GPoint)
+        Public Sub AddRectangle(ByVal p1 As Point, ByVal p2 As Point)
             Me.AddRectangle(p1.X, p1.Y, p2.X - p1.X, p2.Y - p1.Y)
         End Sub
 
         'Add a subpath of Ellipse.
-        Public Sub AddEllipse(ByVal p1 As GPoint, ByVal p2 As GPoint)
+        Public Sub AddEllipse(ByVal p1 As Point, ByVal p2 As Point)
             Me.AddEllipse(p1.X, p1.Y, p2.X - p1.X, p2.Y - p1.Y)
         End Sub
         Public Sub AddEllipse(ByVal x1 As Single, ByVal y1 As Single, ByVal width As Single, ByVal height As Single)
@@ -110,22 +110,22 @@ Namespace Geometry
             Dim sp As New SubPath
             sp.Closed = True
 
-            Dim p1 As New PathPoint(New GPoint(x1 + w2, y1), New GPoint(x1 + w2 - wk, y1), _
-                                    New GPoint(x1 + w2 + wk, y1), PathPointType.Smooth)
+            Dim p1 As New PathPoint(New Point(x1 + w2, y1), New Point(x1 + w2 - wk, y1), _
+                                    New Point(x1 + w2 + wk, y1), PathPointType.Smooth)
             sp.Points.Add(p1)
-            Dim p2 As New PathPoint(New GPoint(x1 + w, y1 + h2), New GPoint(x1 + w, y1 + h2 - hk), _
-                                    New GPoint(x1 + w, y1 + h2 + hk), PathPointType.Smooth)
+            Dim p2 As New PathPoint(New Point(x1 + w, y1 + h2), New Point(x1 + w, y1 + h2 - hk), _
+                                    New Point(x1 + w, y1 + h2 + hk), PathPointType.Smooth)
             sp.Points.Add(p2)
-            Dim p3 As New PathPoint(New GPoint(x1 + w2, y1 + h), New GPoint(x1 + w2 + wk, y1 + h), _
-                                    New GPoint(x1 + w2 - wk, y1 + h), PathPointType.Smooth)
+            Dim p3 As New PathPoint(New Point(x1 + w2, y1 + h), New Point(x1 + w2 + wk, y1 + h), _
+                                    New Point(x1 + w2 - wk, y1 + h), PathPointType.Smooth)
             sp.Points.Add(p3)
-            Dim p4 As New PathPoint(New GPoint(x1, y1 + h2), New GPoint(x1, y1 + h2 + hk), _
-                                    New GPoint(x1, y1 + h2 - hk), PathPointType.Smooth)
+            Dim p4 As New PathPoint(New Point(x1, y1 + h2), New Point(x1, y1 + h2 + hk), _
+                                    New Point(x1, y1 + h2 - hk), PathPointType.Smooth)
             sp.Points.Add(p4)
 
             Me.spaths.Add(sp)
         End Sub
-        Public Sub AddEllipse(ByVal rect As GRect)
+        Public Sub AddEllipse(ByVal rect As Rect)
             Me.AddEllipse(rect.X, rect.Y, rect.Width, rect.Height)
         End Sub
 
@@ -167,9 +167,9 @@ Namespace Geometry
             Next
         End Sub
 
-        Public Function GetTightBound() As GRect
+        Public Function GetTightBound() As Rect
             Dim flag As Boolean = True
-            Dim bound As GRect
+            Dim bound As Rect
             For Each sp As SubPath In Me.spaths
                 If flag Then
                     bound = sp.GetTightBound
@@ -181,9 +181,9 @@ Namespace Geometry
             Return bound
         End Function
 
-        Public Function GetBound() As GRect
+        Public Function GetBound() As Rect
             Dim flag As Boolean = True
-            Dim bound As GRect
+            Dim bound As Rect
             For Each sp As SubPath In Me.spaths
                 If flag Then
                     bound = sp.GetBound
@@ -205,7 +205,7 @@ Namespace Geometry
 
 
 
-        Public Function isOutlineVisible(ByVal p As GPoint, ByVal width As Single) As Boolean
+        Public Function isOutlineVisible(ByVal p As Point, ByVal width As Single) As Boolean
             Dim mindist As Double = Double.MaxValue
 
             For Each sp As SubPath In Me.spaths
@@ -221,10 +221,10 @@ Namespace Geometry
             Return IIf(mindist <= fmindist, True, False)
         End Function
 
-        Public Function isVisible(ByVal p As GPoint) As Boolean
+        Public Function isVisible(ByVal p As Point) As Boolean
             Dim nint As Integer = 0
             Dim bound = Me.GetBound
-            Dim p1 = bound.Location - New GPoint(20, 20)
+            Dim p1 = bound.Location - New Point(20, 20)
 
             For Each sp As SubPath In Me.spaths
                 Dim nb = sp.countBezier
@@ -279,9 +279,9 @@ Namespace Geometry
             Next
         End Sub
 
-        Public Function GetBound() As GRect
+        Public Function GetBound() As Rect
 
-            Dim result As GRect
+            Dim result As Rect
 
             Dim n = countBezier()
 
@@ -297,8 +297,8 @@ Namespace Geometry
 
         End Function
 
-        Public Function GetTightBound() As GRect
-            Dim result As GRect
+        Public Function GetTightBound() As Rect
+            Dim result As Rect
 
 
             Dim n = countBezier()
@@ -336,7 +336,7 @@ Namespace Geometry
 
         End Function
 
-        Public Function getBezier(ByVal i As Integer) As GCubicBezier
+        Public Function getBezier(ByVal i As Integer) As CubicBezier
             Dim n = countBezier()
             Dim pp1 = Points(i)
 
@@ -353,7 +353,7 @@ Namespace Geometry
             End If
             Dim pp2 = Points(np2)
 
-            Dim c1, c2 As GPoint
+            Dim c1, c2 As Point
             If pp1.Type = PathPointType.None Then
                 c1 = pp1.M
             Else
@@ -364,7 +364,7 @@ Namespace Geometry
             Else
                 c2 = pp2.C1
             End If
-            Dim bez As New GCubicBezier(pp1.M, c1, c2, pp2.M)
+            Dim bez As New CubicBezier(pp1.M, c1, c2, pp2.M)
 
             Return bez
         End Function
@@ -376,23 +376,23 @@ Namespace Geometry
 
     Public Class PathPoint
 
-        Dim _c1, _c2, _m As GPoint
+        Dim _c1, _c2, _m As Point
 
         Public Sub New()
-            _m = New GPoint
-            _c1 = New GPoint
-            _c2 = New GPoint
+            _m = New Point
+            _c1 = New Point
+            _c2 = New Point
         End Sub
 
-        Public Sub New(ByVal p As GPoint)
+        Public Sub New(ByVal p As Point)
             _m = p
-            _c1 = New GPoint
-            _c2 = New GPoint
+            _c1 = New Point
+            _c2 = New Point
             Me.Type = PathPointType.None
         End Sub
 
-        Public Sub New(ByVal main As GPoint, ByVal pControlPoint As GPoint, _
-                        ByVal nControlPoint As GPoint, Optional ByVal pType As PathPointType = PathPointType.Sharp)
+        Public Sub New(ByVal main As Point, ByVal pControlPoint As Point, _
+                        ByVal nControlPoint As Point, Optional ByVal pType As PathPointType = PathPointType.Sharp)
 
             Me._m = main
             Me._c1 = pControlPoint
@@ -401,38 +401,38 @@ Namespace Geometry
 
         End Sub
 
-        Public Property M As GPoint
+        Public Property M As Point
             Get
                 Return Me._m
             End Get
-            Set(ByVal value As GPoint)
+            Set(ByVal value As Point)
                 _m = value
             End Set
         End Property
-        Public Property C1 As GPoint
+        Public Property C1 As Point
             Get
                 Return Me._c1
             End Get
-            Set(ByVal value As GPoint)
+            Set(ByVal value As Point)
                 Me._c1 = value
             End Set
         End Property
-        Public Property C2 As GPoint
+        Public Property C2 As Point
             Get
                 Return Me._c2
             End Get
-            Set(ByVal value As GPoint)
+            Set(ByVal value As Point)
                 Me._c2 = value
             End Set
         End Property
 
         Public Property Type As PathPointType
 
-        Public Sub setValue(ByVal m As GPoint)
+        Public Sub setValue(ByVal m As Point)
             Me.M = m
         End Sub
 
-        Public Sub setValue(ByVal m As GPoint, ByVal c1 As GPoint, ByVal c2 As GPoint)
+        Public Sub setValue(ByVal m As Point, ByVal c1 As Point, ByVal c2 As Point)
             Me.M.SetValue(m)
             Me.C1.SetValue(c1)
             Me.C2.SetValue(c2)
