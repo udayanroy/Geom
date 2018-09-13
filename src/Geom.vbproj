@@ -68,6 +68,7 @@
     <Compile Include="Geometry\Point.vb" />
     <Compile Include="Geometry\Rect.vb" />
     <Compile Include="Geometry\Size.vb" />
+    <Compile Include="Geometry\Vector.vb" />
     <Compile Include="Intersection.vb" />
     <Compile Include="Polygon.vb" />
     <Compile Include="Polynomial.vb" />
