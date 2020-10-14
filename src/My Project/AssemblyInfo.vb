@@ -8,8 +8,8 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("Geom")> 
-<Assembly: AssemblyDescription("2D geometry Library for .Net2")> 
+<Assembly: AssemblyTitle("Geom")>
+<Assembly: AssemblyDescription("2D geometry Library for .Net4")>
 <Assembly: AssemblyCompany("Udayan Roy")> 
 <Assembly: AssemblyProduct("Geom")> 
 <Assembly: AssemblyCopyright("Copyright ©Udayan Roy  2013")> 
