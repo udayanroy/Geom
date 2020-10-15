@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <!--*-->
+    <id>Geom.WinForm</id>
+    <!--*-->
+    <version>1.0.0</version>
+    <title>Geom.WinForm</title>
+    <!--*-->
+    <authors>Udayan Roy</authors>
+    <owners>Udayan Roy</owners>
+    <!--
+    <licenseUrl></licenseUrl>
+    <projectUrl></projectUrl>
+    <iconUrl></iconUrl>
+-->
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <!--*-->
+    <description>Geom winform bind</description>
+    <!--*-->
+    <releaseNotes>New Release</releaseNotes>
+    <copyright>Copyright ©  2020</copyright>
+    <tags>
+    </tags>
+    <dependencies>
+      <!--
+      <dependency id="SampleDependency" version="1.0" />
+-->
+    </dependencies>
+  </metadata>
+</package>
