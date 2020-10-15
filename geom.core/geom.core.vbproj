@@ -1,9 +1,26 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <RootNamespace>geom.core</RootNamespace>
+    <RootNamespace>geom</RootNamespace>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <AssemblyName>Geom.core</AssemblyName>
+    <Version>2.0.0</Version>
+    <Authors>Udayan Roy</Authors>
+    <Description>2D geometry Library for .Netstandard2.0</Description>
+    <Copyright>Copyright ©Udayan Roy  2020</Copyright>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageProjectUrl>https://github.com/udayanroy/Geom</PackageProjectUrl>
+    <PackageTags>Geometry geom</PackageTags>
+    <PackageReleaseNotes>.Netstandard2.0 upgrade</PackageReleaseNotes>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>

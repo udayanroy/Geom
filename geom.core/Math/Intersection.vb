@@ -489,7 +489,7 @@ Namespace core
                         ByVal p3 As Point, ByVal p4 As Point, ByVal a1 As Point, ByVal a2 As Point) As Intersection
             Dim a, b, c, d As Point      '// temporary variables
             Dim c3, c2, c1, c0 As Point '// coefficients of cubic
-            Dim cl          '// c coefficient for normal form of line
+            Dim cl As Double          '// c coefficient for normal form of line
             Dim n As Point           '// normal for normal form of line
             Dim min = a1.Min(a2) '// used to determine if point is on line segment
             Dim max = a1.Max(a2) '// used to determine if point is on line segment

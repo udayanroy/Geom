@@ -42,6 +42,13 @@ Namespace core
 
         End Sub
 
+        Public ReadOnly Property Figures As List(Of SubPath)
+            Get
+                Return spaths
+            End Get
+        End Property
+
+
         'Add shapes to the Path.
         'Every shape has added will be a SubPath.
 
@@ -218,7 +225,7 @@ Namespace core
                 Next
             Next
 
-            Return IIf(mindist <= fmindist, True, False)
+            Return If(mindist <= fmindist, True, False)
         End Function
 
         Public Function isVisible(ByVal p As Point) As Boolean

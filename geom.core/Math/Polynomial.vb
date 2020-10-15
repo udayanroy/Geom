@@ -478,8 +478,8 @@ Public Class Polynomial
 
             If (discrim > 0) Then
                 Dim e = Math.Sqrt(discrim)
-                Dim tmp
-                Dim root
+                Dim tmp As Double
+                Dim root As Double
 
                 tmp = -halfB + e
 
@@ -509,7 +509,7 @@ Public Class Polynomial
                 results.Add(-distance * (cos - sqrt3 * sin) - offset)
 
             Else
-                Dim tmp
+                Dim tmp As Double
 
                 If (halfB >= 0) Then
                     tmp = -Math.Pow(halfB, 1 / 3)

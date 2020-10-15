@@ -36,7 +36,7 @@ Namespace core
 
         Const deg2rad As Double = 0.017453292519943295
 
-        Dim _dx, _dy, _m11, _m12, _m21, _m22 As Single
+        'Dim _dx, _dy, _m11, _m12, _m21, _m22 As Single
 
 
         Public Sub New()
@@ -60,6 +60,13 @@ Namespace core
         Public Function Clone() As GMatrix
             Return New GMatrix(_m11, _m12, _m21, _m22, _dx, _dy)
         End Function
+
+        Public Property dx As Double
+        Public Property dy As Double
+        Public Property M11 As Double
+        Public Property M12 As Double
+        Public Property M21 As Double
+        Public Property M22 As Double
 
         Private Sub setMatrix(ByVal m11 As Single, ByVal m12 As Single, ByVal m21 As Single, ByVal m22 As Single, ByVal dx As Single, ByVal dy As Single)
             _m11 = m11
